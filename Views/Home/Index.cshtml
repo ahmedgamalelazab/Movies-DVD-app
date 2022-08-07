@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model LoginViewModel
+
+<div class="container d-flex align-items-center justify-content-center">
+
+    <div class="card text-center shadow-0 w-50 mt-5 shadow">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src="/Images/salah.jpg" class="img-fluid w-25" />
+            <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+            </a>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Login To Salaty</h5>
+            <p class="card-text">
+            <form method="post" class="text-start">
+                <div class="mb-3">
+                    <label asp-for="@Model.Email" class="form-label"></label>
+                    <input class="form-control" asp-for="@Model.Email" aria-describedby="helpId"
+                        placeholder="enter ur email">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Password" class="form-label"></label>
+                    <input  class="form-control" asp-for="@Model.Password" aria-describedby="helpId"
+                        placeholder="enter ur password">
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" name="submit-btn" id="submit-btn" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+            </p>
+        </div>
+         <div class="card-footer"><small><a asp-action="Register" asp-controller="Home">register Instead !</a></small></div>
+    </div>
+</div>

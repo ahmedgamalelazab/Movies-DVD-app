@@ -1,0 +1,116 @@
+@{
+    ViewData["Title"] = "Add";
+}
+
+@model SalahAddViewModel
+
+
+
+<div class="container d-flex align-items-center justify-content-center">
+
+    <div class="card text-center shadow-0 w-50 mt-5 shadow">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src="/Images/salah.jpg" class="img-fluid w-25" />
+            <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+            </a>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">إضافة صلاة</h5>
+            <p class="card-text">
+            <form method="post" class="text-start">
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label"></label>
+                    <input class="form-control" asp-for="@Model.Name" aria-describedby="helpId"
+                        placeholder="enter Salah Name">
+                </div>
+                <div class="mb-3" style="display: none;">
+                    <label asp-for="@Model.IsPrayed" class="form-label"></label>
+                    <input class="form-control" asp-for="@Model.IsPrayed" aria-describedby="helpId" placeholder="false">
+                </div>
+                <div class="mb-3">
+                    <label for="PreyState" class="form-label">حالة إتمام الصلاة</label>
+                    <select class="form-control" name="PreyState" id="PreyState">
+                        <option value="">select Salah State</option>
+                        <option value="true">yes</option>
+                        <option value="false">no</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Tasbeeh.TakpeerCount" class="form-label"></label>
+                    <div class="row">
+                        <div class="col-10">
+                            <input class="form-control" asp-for="@Model.Tasbeeh.TakpeerCount" aria-describedby="helpId">
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary TakpeerCount">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Tasbeeh.HamdCount" class="form-label"></label>
+                    <div class="row">
+                        <div class="col-10">
+                            <input class="form-control" asp-for="@Model.Tasbeeh.HamdCount" aria-describedby="helpId">
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary HamdCount">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Tasbeeh.AstghparCount" class="form-label"></label>
+                    <div class="row">
+                        <div class="col-10">
+                            <input class="form-control" asp-for="@Model.Tasbeeh.AstghparCount"
+                                aria-describedby="helpId">
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary AstghparCount">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" name="submit-btn" id="submit-btn" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function init(fieldId) {
+        $(`#Tasbeeh_${fieldId}`).val("0");
+    }
+
+    function tasbeehIncremental(fieldId, btnClassName) {
+        $(`.${btnClassName}`).click(function (e) {
+            e.preventDefault();
+            console.log("hello fucking world");
+            $(`#Tasbeeh_${fieldId}`).val(Number.parseInt($(`#Tasbeeh_${fieldId}`).val()) + 1);
+        });
+    }
+
+    $('#PreyState').change(function (e) {
+        if ($(this).val() !== null) {
+            $("#IsPrayed").val($(this).val());
+        }
+    });
+
+    init("TakpeerCount");
+    
+    init("HamdCount");
+    
+    init("AstghparCount");
+    
+    tasbeehIncremental("TakpeerCount", "TakpeerCount");
+
+    tasbeehIncremental("HamdCount", "HamdCount");
+
+    tasbeehIncremental("AstghparCount", "AstghparCount");
+
+
+
+</script>

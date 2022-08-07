@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model SalatyProfileViewModel
+
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">@Model.FirstName @Model.LastName</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">@Model.EmailAddress <span class="visually-hidden">(current)</span></a>
+                </li>               
+            </ul> 
+            <a asp-action="Add" asp-controller="Salaty" class="btn btn-primary">إضافة صلاة</a>
+            <a asp-action="Logout" asp-controller="Home" class="btn btn-primary ms-3">تسجيل الخروج</a>
+            @* <form class="d-flex my-2 my-lg-0">
+                <input class="form-control me-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> *@
+        </div>
+    </div>
+</nav>
+
+<table class="table text-center border table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>إسم الصلاة</th>
+            <th>تمت الصلاة</th>
+            <th>التكبير</th>
+            <th>الاستغفار</th>
+            <th>الحمدلله</th>
+            <th>محو</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var salah in @Model.Salahs)
+        {
+            <tr>
+                <td scope="row">@salah.Name</td>
+                @if(salah.IsPrayed){
+                    <td>✅</td>
+                }else{
+                    <td>❎</td>
+                }
+                <td>@salah.Tasbeeh.TakpeerCount</td>
+                <td>@salah.Tasbeeh.AstghparCount</td>
+                <td>@salah.Tasbeeh.HamdCount</td>                
+                <td><a asp-action="Delete" asp-controller="Salaty" asp-route-id=@salah.Id class="btn btn-danger">delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
